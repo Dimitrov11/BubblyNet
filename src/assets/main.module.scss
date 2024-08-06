@@ -2,4 +2,13 @@ body {
     margin: 0;
     font-family: 'Opens Sans', sans-serif;
     background-color: #A7C1D9;
+
+    main {
+        max-width: 90%;
+        margin: 2rem auto 0;
+        
+        @media (min-width: 1200px) {
+            max-width: 1170px;
+        }
+    }
 }
