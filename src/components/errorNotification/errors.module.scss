@@ -1,0 +1,23 @@
+.formInputNotification {
+    font-size: 18px;
+    font-weight: 700;
+    font-style: italic;
+    color: #fff;
+    background-color: #D94E4E;
+    max-width: fit-content;
+    padding: 5px 15px;
+    border-radius: 5px;
+    box-shadow: 0 5px 10px #171717;
+    animation: cssAnimation 0s ease-in 2s forwards;
+    animation-fill-mode: forwards;
+    position: fixed;
+}
+
+@keyframes cssAnimation {
+    to {
+        width: 0;
+        height: 0;
+        overflow: hidden;
+        padding: 0;
+    }
+}
