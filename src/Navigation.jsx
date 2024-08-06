@@ -1,15 +1,19 @@
 import { Routes, Route } from "react-router-dom";
-import Home from "./pages/Home/HomePage.jsx";
+import HomePage from "./pages/Home/HomePage.jsx";
+import Header from "./components/header/Header.jsx";
+import style from "./assets/main.module.scss"
 
-function HomePage() {
+
+function Navigation() {
   return (
     <>
-      <p>Hello</p>
+      <Header />
+
       <Routes>
-        <Route path="/" element={<Home/>} />
+        <Route path="/" element={<HomePage/>} />
       </Routes>
     </>
   );
 }
 
-export default HomePage
+export default Navigation
