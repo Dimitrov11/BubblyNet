@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
-import Home from "./pages/Home/Home.jsx";
+import Home from "./pages/Home/HomePage.jsx";
 
-function Navigation() {
+function HomePage() {
   return (
     <>
       <p>Hello</p>
@@ -12,4 +12,4 @@ function Navigation() {
   );
 }
 
-export default Navigation
+export default HomePage
