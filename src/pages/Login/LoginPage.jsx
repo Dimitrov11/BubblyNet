@@ -25,11 +25,12 @@ export default function LoginPage() {
     const result = await loginUser(email, password);
 
     if (result.accessToken) {
-        navigate("/");
+      localStorage.setItem("userUid", result.uid);
+      navigate("/");
     } else {
-        setError(result);
+      setError(result);
     }
-};
+  };
 
   return (
     <main>
