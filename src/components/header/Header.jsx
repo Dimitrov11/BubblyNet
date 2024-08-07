@@ -2,8 +2,11 @@ import React from 'react'
 import style from "./Header.module.scss"
 import { Link } from 'react-router-dom'
 import logo from '../../assets/logo.png'
+import { getAuth } from "firebase/auth/cordova";
 
 export default function Header() {
+  const user = getAuth();
+  console.log(user.currentUser);
   return (
     <header>
         <div className={style.wrapper}>
