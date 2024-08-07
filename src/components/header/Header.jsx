@@ -1,42 +1,61 @@
-import React, { useEffect, useState } from 'react'
-import style from "./Header.module.scss"
-import { Link, useNavigate } from 'react-router-dom'
-import logo from '../../assets/logo.png'
+import React, { useEffect, useState } from "react";
+import style from "./Header.module.scss";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import logo from "../../assets/logo.png";
 import { getAuth } from "firebase/auth/cordova";
 
 export default function Header() {
-  const user = getAuth();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const user = getAuth();
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  let location = useNavigate();
+    let location = useLocation();
+    let navigate = useNavigate();
 
-  useEffect(() => {
-    if (localStorage.getItem('userUid')) {
-      setIsLoggedIn(true);
-    }
-  }, [location]);
+    useEffect(() => {
+        if (localStorage.getItem("userUid")) {
+            setIsLoggedIn(true);
+        } else {
+            setIsLoggedIn(false);
+        }
+    }, [location]);
 
-  return (
-    <header>
-        <div className={style.wrapper}>
-            
-            <Link to="/">
-                <img src={logo} alt="Logo" />
-            </Link>
-            
-            <nav>
+    const logoutHandler = async (e) => {
+        e.preventDefault();
+        localStorage.clear();
+        await user.signOut();
+        navigate("/");
+    };
 
-                {isLoggedIn ? 
-                <>
-                <Link to="/logout" className={style.logout}>Logout</Link>
-                </> 
-                : 
-                <><Link to="/register" className={style.register}>Register</Link>
-                <Link to="/login" className={style.login}>Login</Link></>
-                }
-            </nav>
-        </div>
+    return (
+        <header>
+            <div className={style.wrapper}>
+                <Link to="/">
+                    <img src={logo} alt="Logo" />
+                </Link>
 
-    </header>
-  )
+                <nav>
+                    {isLoggedIn ? (
+                        <>
+                            <Link
+                                to="/logout"
+                                onClick={logoutHandler}
+                                className={style.logout}
+                            >
+                                Logout
+                            </Link>
+                        </>
+                    ) : (
+                        <>
+                            <Link to="/register" className={style.register}>
+                                Register
+                            </Link>
+                            <Link to="/login" className={style.login}>
+                                Login
+                            </Link>
+                        </>
+                    )}
+                </nav>
+            </div>
+        </header>
+    );
 }
