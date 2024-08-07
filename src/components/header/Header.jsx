@@ -11,8 +11,8 @@ export default function Header() {
   let location = useNavigate();
 
   useEffect(() => {
-    if (user.currentUser) {
-      setIsLoggedIn(localStorage.getItem('userUid'));
+    if (localStorage.getItem('userUid')) {
+      setIsLoggedIn(true);
     }
   }, [location]);
 
