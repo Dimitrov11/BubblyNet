@@ -12,7 +12,7 @@ export default function Header() {
 
   useEffect(() => {
     if (user.currentUser) {
-      setIsLoggedIn(user.currentUser.uid == localStorage.getItem('userUid'));
+      setIsLoggedIn(localStorage.getItem('userUid'));
     }
   }, [location]);
 
