@@ -19,7 +19,7 @@ function Navigation() {
 
         <Route path="/login" element={<LoginPage/>} />
                 
-        {/* <Route path="/catalog" element={<CatalogPage/>} /> */}
+        <Route path="/catalog" element={<CatalogPage/>} />
 
         <Route path="/create" element={<CreatePage/>} />
       </Routes>

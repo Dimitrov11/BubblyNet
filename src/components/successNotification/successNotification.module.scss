@@ -1,4 +1,5 @@
-$color-white: #ffffff;
+$white-color: #ffffff;
+$button-color: #01A4FF;
 
 .popupOverlay {
     position: fixed;
@@ -6,7 +7,7 @@ $color-white: #ffffff;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: #00000080;
+    background-color: #000000d4;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -14,24 +15,40 @@ $color-white: #ffffff;
 }
 
 .popup {
-    background-color: $color-white;
-    padding: 20px;
+    background-color: $white-color;
+    padding: 30px;
     border-radius: 10px;
     text-align: center;
     box-shadow: 0 4px 8px #00000033;
+    
+    @media (max-width: 1200px){
+        padding: 30px 5px;
+    }
+
+    p {
+        text-align: center;
+        font-size: 24px;
+    }
 
     button {
-        margin-top: 10px;
+        margin: 5px 15px 0;
         padding: 10px 20px;
         border: none;
-        background-color: #4CAF50;
-        color: $color-white;
+        background-color: $button-color;
+        color: $white-color;
         border-radius: 5px;
         cursor: pointer;
-        font-size: 16px;
+        transition: 0.4s;
+        font-size: 18px;
+        width: 125px;
         
         &:hover {
-            background-color: #45a049;
+            color: $button-color;
+            background-color: $white-color;
+            border: $button-color;
+            box-shadow: 0 0 13px $button-color;
+            transition: 0.4s;
+            transform: scale(1.01);
         }
     }
 

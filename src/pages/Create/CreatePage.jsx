@@ -1,67 +1,80 @@
 import React, { useState } from "react";
 import { createPost } from "../../services/create";
-import { Navigate, useNavigate, useNavigation } from "react-router-dom";
 import style from "../Register/RegisterPage.module.scss";
 import ErrorNotification from "../../components/errorNotification/errorNotification.jsx";
 import SuccessNotification from "../../components/successNotification/SuccessNotification.jsx";
 
 export default function CreatePage() {
-  const [error, setError] = useState("");
-  const [message, setMessage] = useState("");
-  const [showPopup, setShowPopup] = useState(false);
+    const [error, setError] = useState("");
+    const [message, setMessage] = useState("");
+    const [showPopup, setShowPopup] = useState(false);
+    const [postId, setPostId] = useState(null);
 
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+    const [title, setTitle] = useState("");
+    const [description, setDescription] = useState("");
 
-  const Navigate = useNavigate();
-
-  const titleHandler = (e) => {
-    setTitle(e.target.value);
-  };
-  const descriptionHandler = (e) => {
-    setDescription(e.target.value);
-  };
-
-  const createButtonHandler = async (e) => {
-    e.preventDefault();
-    const result = await createPost(title, description);
-
-    if (result.startsWith("Post created")) {
-      setMessage(result);
-      setShowPopup(true);
-    } else {
-        setMessage(result);
+    const titleHandler = (e) => {
+        setTitle(e.target.value);
+    };
+    const descriptionHandler = (e) => {
+        setDescription(e.target.value);
+    };
+    const fileHandler = (e) => {
+        // if () {
+            
+        // }
+        setUploader(e.target.files[0]);
     }
-};
 
-const closePopup = () => {
-    setShowPopup(false);
-    Navigate("/");
-  };
+    const createButtonHandler = async (e) => {
+        e.preventDefault();
 
-  return (
-    <main>
-      {error !== "" ? <ErrorNotification errorMessage={error} /> : <></>}
+        setError("");
+        setMessage("");
+        setPostId("");
 
-      <form>
-        <h2>New Post</h2>
+        const result = await createPost(title, description);
 
-        <div className={style.inputWrapper}>
-          <label htmlFor="title">Title: </label>
-          <input type="text" id="title" onChange={titleHandler} />
-        </div>
+        if (result === "The post is created successfully") {
+            setMessage(result);
+            setPostId(result.postId);
+            setShowPopup(true);
+        } else {
+            setError(result);
+        }
+    };
 
-        <div className={style.inputWrapper}>
-          <label htmlFor="description">Description: </label>
-          <input type="text" id="description" onChange={descriptionHandler} />
-        </div>
+    return (
+        <main>
+            {error !== "" ? <ErrorNotification errorMessage={error} /> : <></>}
 
-        <button onClick={createButtonHandler}>Create Post</button>
+            <form>
+                <h2>New Post</h2>
 
-      </form>
+                <div className={style.inputWrapper}>
+                    <label htmlFor="title">Title: </label>
+                    <input type="text" id="title" onChange={titleHandler} />
+                </div>
 
-        {showPopup && <SuccessNotification message={message} onClose={closePopup} />}
+                <div className={style.inputWrapper}>
+                    <label htmlFor="description">Description: </label>
+                    <input type="text" id="description" onChange={descriptionHandler} />
+                </div>
+                
+                <div className={style.inputWrapper}>
+                    <label htmlFor="uploadImg">Upload file: </label>
+                    <input type="file" id="uploadImg" onChange={fileHandler} />
+                </div>
 
-    </main>
-  );
+                <button onClick={createButtonHandler}>Create Post</button>
+            </form>
+
+            {showPopup && (
+                <SuccessNotification
+                    message={message}
+                    postId={postId}
+                />
+            )}
+        </main>
+    );
 }
