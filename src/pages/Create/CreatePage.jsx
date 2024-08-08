@@ -12,6 +12,7 @@ export default function CreatePage() {
 
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
+    const [file, setFile] = useState("");
 
     const titleHandler = (e) => {
         setTitle(e.target.value);
@@ -20,10 +21,7 @@ export default function CreatePage() {
         setDescription(e.target.value);
     };
     const fileHandler = (e) => {
-        // if () {
-            
-        // }
-        setUploader(e.target.files[0]);
+        setFile(e.target.files[0]);
     }
 
     const createButtonHandler = async (e) => {
@@ -33,12 +31,13 @@ export default function CreatePage() {
         setMessage("");
         setPostId("");
 
-        const result = await createPost(title, description);
+        const result = await createPost(title, description, file);
 
-        if (result === "The post is created successfully") {
-            setMessage(result);
+        if (result == true) {          
+            setMessage("The post is created successfully");
             setPostId(result.postId);
             setShowPopup(true);
+            
         } else {
             setError(result);
         }

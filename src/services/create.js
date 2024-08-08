@@ -1,36 +1,60 @@
 import { collection, addDoc } from "firebase/firestore";
 import { getAuth } from "firebase/auth/cordova";
-import { db } from "../firebase";
+import { db, storage } from "../firebase";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
-export async function createPost(title, description) {
-  const auth = getAuth();
-  const user = auth.currentUser;
+export async function createPost(title, description, file) {
+    const auth = getAuth();
+    const user = auth.currentUser;
 
-  if (!user) {
-    return "User is not logged in";
-  }
+    if (!user) {
+        return "User is not logged in";
+    }
 
-  if (title === "" && description === "") {
-    return "The post must have a Title";
-  }
-  if (title === "") {
-    return "The post must have a Title";
-  }
-  if (title.length <= 1) {
-    return "Title be must be at least 2 characters long";
-  }  
-  
-  try {
-    const newPost = await addDoc(collection(db, "posts"), {
-      title,
-      description,
-      createdAt: new Date(),
-      authorId: user.uid, 
-    });   
+    if (file == '') {
+        return "Upload a file";
+    }
 
-    const createdPostId = newPost.id;
-    return "The post is created successfully";
-  } catch (error) {
-    return "Creating a post has failed";
-  }
+    if (title === "") {
+        return "The post must have a Title";
+    }
+    if (title.length <= 1) {
+        return "Title be must be at least 2 characters long";
+    }
+
+    try {
+        const storageRef = ref(storage, `images/${file.name}`);
+        const uploadFile = uploadBytesResumable(storageRef, file);
+
+        await new Promise((resolve, reject) => {
+            uploadFile.on(
+                "state_changed",
+                (snapshot) => {
+                    const progress =
+                        (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                    console.log(`Upload is ${progress}% done`);
+                },
+                (error) => {
+                    reject(error);
+                },
+                () => {
+                    resolve();
+                }
+            );
+        });
+
+        const downloadURL = await getDownloadURL(uploadFile.snapshot.ref);
+
+        const newPost = await addDoc(collection(db, "posts"), {
+            title,
+            description,
+            createdAt: new Date(),
+            authorId: user.uid,
+            imageUrl: downloadURL,
+        });
+
+        return true;
+    } catch (error) {
+        return "Creating a post has failed";
+    }
 }
