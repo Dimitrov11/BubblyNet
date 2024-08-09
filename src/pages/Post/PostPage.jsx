@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function CatalogPage() {
+export default function PostPage() {
   return (
     <main>
-        CatalogPage
+        Single post        
     </main>
   )
 }

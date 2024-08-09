@@ -5,7 +5,7 @@ import style from "./assets/main.module.scss"
 import RegisterPage from "./pages/Register/RegisterPage.jsx";
 import LoginPage from "./pages/Login/LoginPage.jsx";
 import CreatePage from "./pages/Create/CreatePage.jsx";
-import CatalogPage from "./pages/Catalog/CatalogPage.jsx";
+import PostPage from "./pages/Post/PostPage.jsx";
 
 function Navigation() {
   return (
@@ -19,7 +19,7 @@ function Navigation() {
 
         <Route path="/login" element={<LoginPage/>} />
                 
-        <Route path="/catalog" element={<CatalogPage/>} />
+        <Route path="/post/:id" element={<PostPage/>} />
 
         <Route path="/create" element={<CreatePage/>} />
       </Routes>
