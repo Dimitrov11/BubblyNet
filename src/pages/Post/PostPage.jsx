@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 import getSinglePost from "../../services/getSinglePost";
-import { useParams } from "react-router-dom";
 import style from "./PostPage.module.scss"
 
 export default function PostPage() {
@@ -36,6 +36,14 @@ export default function PostPage() {
                 <div className={style.singlePostContent}>
                     <h3>{post.title}</h3>
                     <p>{post.description}</p>
+                    {
+                        localStorage.getItem('userUid') == post.authorId ? 
+                        <div className={style.buttons}>
+                            <Link to={`/edit/${post.id}`}>Edit</Link>
+                            <Link className={style.deleteButton}>Delete</Link>
+                        </div> :
+                        <></>
+                    }
                 </div>
             </div>
         } 

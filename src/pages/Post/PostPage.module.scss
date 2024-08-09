@@ -14,6 +14,10 @@
         flex-direction: row;
         text-align: left;
     }
+
+    img {
+        max-width: 50%;
+    }
 }
 
 .noPostError {
@@ -24,4 +28,44 @@
     color: #fff;
     border-radius: 10px;
     margin: 0 auto;
+}
+
+.singlePostContent {
+    h3 {
+        margin: 0;
+    }
+    
+    p {
+        margin-bottom: 1rem;
+    }
+
+    .buttons {
+        display: flex;
+        gap: 1rem;
+
+        a {
+            cursor: pointer;
+            border: 0;
+            border-radius: 4px;
+            font-weight: 600;
+            width: fit-content;
+            transition: 0.4s;
+            padding: 10px;
+            color: #1A99D5;
+            background-color: #ffffff;
+            text-decoration: none;
+
+            &:hover {
+                color: #ffffff;
+                box-shadow: 0 0 10px #1A99D5;
+                background-color: #1A99D5;
+                transition: 0.4s;
+            }
+
+            &.deleteButton:hover {
+                box-shadow: 0 0 10px #D94E4E;
+                background-color: #D94E4E;
+            }
+        }
+    }
 }
