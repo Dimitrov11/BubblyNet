@@ -37,7 +37,7 @@ export default function Header() {
                     {isLoggedIn ? (
                         <>
                             <Link to="/create">Create</Link>
-                            <Link to="/logout" onClick={logoutHandler}>
+                            <Link className={style.logoutButton} to="/logout" onClick={logoutHandler}>
                                 Logout
                             </Link>
                         </>

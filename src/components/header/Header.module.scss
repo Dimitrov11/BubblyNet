@@ -1,14 +1,14 @@
 header {
-    background-color:  #F2C6A0;
+    background-color: #F2C6A0;
     padding: 20px 0;
-    
+
     .wrapper {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
         max-width: 90%;
         margin: 0 auto;
-        
+
         @media (min-width: 1200px) {
             max-width: 1170px;
         }
@@ -17,7 +17,7 @@ header {
     nav {
         display: flex;
         align-items: center;
-        
+
         a {
             cursor: pointer;
             border: 0;
@@ -30,14 +30,18 @@ header {
             color: #1A99D5;
             background-color: #ffffff;
             text-decoration: none;
-    
+
             &:hover {
                 color: #ffffff;
                 box-shadow: 0 0 10px #1A99D5;
                 background-color: #1A99D5;
                 transition: 0.4s;
             }
+
+            &.logoutButton:hover {
+                box-shadow: 0 0 10px #D94E4E;
+                background-color: #D94E4E;
+            }
         }
     }
-
 }
