@@ -7,7 +7,6 @@ export default async function getAllPosts() {
         const postsSnapshot = await getDocs(postsCollectionRef);
         const postsList = postsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
 
-        console.log(postsList);
         if (postsList.length > 0) {
           return postsList;
         } else {
