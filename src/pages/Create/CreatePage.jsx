@@ -33,9 +33,9 @@ export default function CreatePage() {
 
         const result = await createPost(title, description, file);
 
-        if (result == true) {          
+        if (result.status == true) {          
             setMessage("The post is created successfully");
-            setPostId(result.postId);
+            setPostId(result.postID);
             setShowPopup(true);
             
         } else {

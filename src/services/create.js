@@ -10,16 +10,14 @@ export async function createPost(title, description, file) {
     if (!user) {
         return "User is not logged in";
     }
-
-    if (file == '') {
-        return "Upload a file";
-    }
-
     if (title === "") {
         return "The post must have a Title";
     }
     if (title.length <= 1) {
         return "Title be must be at least 2 characters long";
+    }
+    if (file == '') {
+        return "Upload a file";
     }
 
     try {
@@ -52,8 +50,10 @@ export async function createPost(title, description, file) {
             authorId: user.uid,
             imageUrl: downloadURL,
         });
-
-        return true;
+        
+        return {'status': true,
+            'postID': newPost.id
+        };
     } catch (error) {
         return "Creating a post has failed";
     }

@@ -3,17 +3,16 @@ import successImage from "../../assets/successImage.png"
 import style from "./successNotification.module.scss";
 import { Navigate, useNavigate } from 'react-router-dom';
 
-
 const successNotification = (props) => {
   const [showPopup, setShowPopup] = useState(false);
-  const [error, setError] = useState("");
-  const [message, setMessage] = useState("");
-  const [postId, setPostId] = useState(null);
+  // const [error, setError] = useState("");
+  // const [message, setMessage] = useState("");
+  // const [postId, setPostId] = useState(null);
   
   const Navigate = useNavigate();
 
   const handleViewPost = () => {
-    Navigate(`/posts/${postId}`);
+    Navigate(`/post/${props.postId}`);
   };
 
   const closePopup = () => {
