@@ -27,11 +27,13 @@ function HomePage() {
     <main>
       <div className={style.boxesWrapper}>
         {posts.map((post) => (
-            <Post  key={post.id}
-              title={post.title}
-              image={post.imageUrl}
-              description={post.description}
-            />
+          <Post
+            key={post.id}
+            postId={post.id}
+            title={post.title}
+            image={post.imageUrl}
+            description={post.description}
+          />
         ))}
       </div>
     </main>
